@@ -20,11 +20,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GeneralResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(PersonNotFoundException.class)
-	public final ResponseEntity<PersonNotFoundException> handleCreateDataException(PersonNotFoundException e,
+	public final ResponseEntity<ExceptionResponse> handleCreateDataException(PersonNotFoundException e,
 			WebRequest request) {
-		PersonNotFoundException response = new PersonNotFoundException(e.getMessage());
-		ResponseEntity<PersonNotFoundException> responseEntity = new ResponseEntity<PersonNotFoundException>(response,
-				HttpStatus.INTERNAL_SERVER_ERROR);
+		ExceptionResponse response = new ExceptionResponse(HttpStatus.NOT_FOUND.toString(), e.getMessage());
+		ResponseEntity<ExceptionResponse> responseEntity = new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 		return responseEntity;
 	}
 
